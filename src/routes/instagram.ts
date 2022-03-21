@@ -5,6 +5,10 @@ const VERCEL_PROJECT_ID = import.meta.env.VITE_VERCEL_PROJECT_ID;
 const REDEPLOY_URL = import.meta.env.VITE_VERCEL_REDEPLOY_URL;
 const GET_TOKEN_URL = `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${INSTAGRAM_ACCESS_TOKEN}`;
 
+export default async () => {
+	return await get();
+};
+
 export async function get() {
 	const postsUrl = `https://graph.instagram.com/me/media?fields=caption,id,media_type,media_url,timestamp&access_token=${INSTAGRAM_ACCESS_TOKEN}`;
 	const response = await fetch(postsUrl);
@@ -20,10 +24,8 @@ export async function get() {
 	}
 
 	return {
-		body: {
-			posts: data.data,
-			paging: data.paging
-		}
+		posts: data.data,
+		paging: data.paging
 	};
 }
 
@@ -48,8 +50,8 @@ export async function updateInstagramToken() {
 	// Get and update the Token and expiry ENV at vercel
 	if (!data) return;
 	// Get env id's
-	const accessToken = data.envs.find((env) => env.key === 'VITE_INSTAGRAM_ACCESS_TOKEN');
-	const expiry = data.envs.find((env) => env.key === 'VITE_INSTAGRAM_TOKEN_EXPIRY_DATE');
+	const accessToken = data.envs.find((env) => env.key === 'INSTAGRAM_ACCESS_TOKEN');
+	const expiry = data.envs.find((env) => env.key === 'INSTAGRAM_TOKEN_EXPIRY_DATE');
 	console.log(accessToken, expiry.id);
 
 	// Update the ENV
@@ -71,8 +73,8 @@ export async function updateInstagramToken() {
 				Authorization: 'Bearer ' + VERCEL_ACCESS_TOKEN
 			},
 			body: JSON.stringify({
-				// value: Date.now() + newToken.expires_in * 1000 - 1000 * 60 * 60 * 24 * 7
-				value: `${Date.now() + 1000 * 60 * 10}`
+				value: Date.now() + newToken.expires_in * 1000 - 1000 * 60 * 60 * 24 * 7
+				// value: `${Date.now() + 1000 * 60 * 10}`
 			})
 		});
 		// console.log('___________________________________________________________');
