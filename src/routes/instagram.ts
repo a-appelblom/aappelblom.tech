@@ -14,9 +14,11 @@ export async function get() {
 	const today = Date.now();
 	const expired = today > tokenExpires;
 
+	console.log(expired);
 	if (expired) {
 		updateInstagramToken();
 	}
+
 	return {
 		body: {
 			posts: data.data,
