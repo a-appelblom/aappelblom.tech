@@ -14,8 +14,8 @@
 	export let posts;
 	export let paging;
 
-	console.log(paging);
-	console.log(posts);
+	// console.log(paging);
+	// console.log(posts);
 </script>
 
 <h1>Instagram</h1>
