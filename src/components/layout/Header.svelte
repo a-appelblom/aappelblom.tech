@@ -3,10 +3,11 @@
 </script>
 
 <header>
-	<nav>
+	<!-- <nav>
 		<ul class="list-style-none">
 			<li><a href="/">{name}</a></li>
 			<li><a href="/instagram">instagram</a></li>
+			<li><a href="/megame">Megame</a></li>
 		</ul>
-	</nav>
+	</nav> -->
 </header>

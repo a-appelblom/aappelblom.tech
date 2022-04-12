@@ -1,8 +1,12 @@
 <script lang="ts">
+	import { browser } from '$app/env';
+	import { goto } from '$app/navigation';
+
+	if (browser) {
+		if (navigator.language.includes('en')) {
+			goto('/en');
+		} else {
+			goto('/sv');
+		}
+	}
 </script>
-
-<svelte:head>
-	<title>Anton Appelblom @ Mujina</title>
-</svelte:head>
-
-<h1>Homepage</h1>
